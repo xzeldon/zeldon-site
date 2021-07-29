@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Inter Var";
+    font-weight: 400 900;
+    font-display: swap;
+    font-style: normal;
+    src: url("/src/font/Inter.woff2") format("woff2");
+}
+
+html {
+    font-family: "Inter Var", sans-serif;
+    font-size: 17px;
+    box-sizing: border-box;
+}
+
+.greeting {
+    font-variation-settings: "wght" 400;
+    letter-spacing: 0rem;
+    line-height: 1.7rem;
+}

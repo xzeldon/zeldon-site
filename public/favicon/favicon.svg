@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1c1c1c;
+      }
+
+      .cls-2, .cls-3 {
+        font-size: 54px;
+        fill: #fff;
+        font-family: Gotham;
+        font-weight: 300;
+      }
+
+      .cls-2 {
+        opacity: 0.02;
+      }
+    </style>
+  </defs>
+  <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="19" y="19" width="475" height="474" rx="83" ry="83"/>
+  <text id="Z_copy_4" data-name="Z copy 4" class="cls-2" transform="translate(522.885 30.084) rotate(-175.193) scale(13.308)">Z</text>
+  <text id="Z_copy_5" data-name="Z copy 5" class="cls-2" transform="translate(479.815 520.812) rotate(-85.193) scale(13.308)">Z</text>
+  <text id="Z_copy_6" data-name="Z copy 6" class="cls-2" transform="matrix(-8.589, -10.166, 10.166, -8.589, 607.135, 290.838)">Z</text>
+  <text id="Z_copy_7" data-name="Z copy 7" class="cls-2" transform="matrix(10.166, -8.589, 8.589, 10.166, 229.683, 607.38)">Z</text>
+  <text id="Z" class="cls-3" transform="translate(349.456 422.32) rotate(-75) scale(7.165)">Z</text>
+  <text id="Z_copy" data-name="Z copy" class="cls-3" transform="translate(93.511 352.737) rotate(15) scale(7.165)">Z</text>
+  <text id="Z_copy_2" data-name="Z copy 2" class="cls-3" transform="translate(203.248 442.12) rotate(-30) scale(7.165)">Z</text>
+</svg>
