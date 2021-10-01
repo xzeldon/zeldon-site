@@ -91,7 +91,7 @@
 	margin-top: 1.5em;
 	display: grid;
 	grid-auto-flow: column;
-	grid-gap: 1em;
+	grid-gap: 0.3em;
 	justify-content: center;
 	align-items: center;
 }
