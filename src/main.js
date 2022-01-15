@@ -12,8 +12,7 @@ import { import_js_as_module } from './utils';
 
 window.onload = start;
 
-async function start()
-{
+async function start() {
     await import_js_as_module('/fluid.js');
     perspective_3d('perspective');
 }

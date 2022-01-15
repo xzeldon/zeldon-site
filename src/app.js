@@ -1,7 +1,6 @@
 import { event_listener_array, calc_delta_time } from './utils';
 
-export function perspective_3d(class_name)
-{
+export function perspective_3d(class_name) {
     const elements = document.body.getElementsByClassName(class_name);
 
     let velocity_x = 0;
@@ -11,8 +10,7 @@ export function perspective_3d(class_name)
     let target_rotation_x = 0;
     let target_rotation_y = 0;
 
-    (function update()
-    {
+    (function update() {
         let dt = calc_delta_time();
         const ss = .08;
 
@@ -23,18 +21,15 @@ export function perspective_3d(class_name)
 
         const style = `perspective(700px) rotateX(${rotation_y}rad) rotateY(${rotation_x}rad)`;
 
-        for (const el of elements)
-        {
+        for (const el of elements) {
             el.style.transform = style;
         }
 
         requestAnimationFrame(update);
     })();
 
-    event_listener_array(window, ["mousemove", "touchmove"], (e) =>
-    {
-        if (e.changedTouches && e.changedTouches[0])
-        {
+    event_listener_array(window, ["mousemove", "touchmove"], (e) => {
+        if (e.changedTouches && e.changedTouches[0]) {
             e = e.changedTouches[0];
         }
 
@@ -45,45 +40,37 @@ export function perspective_3d(class_name)
         target_rotation_y = clamp(target_rotation_y, -0.5, 0.5);
     }, false);
 
-    function spring(position, target, velocity, omega, dt)
-    {
+    function spring(position, target, velocity, omega, dt) {
         let n1 = velocity - (position - target) * (Math.pow(omega, 2) * dt);
         let n2 = 1 + omega * dt;
         return n1 / Math.pow(n2, 2);
     }
-    function clamp(value, min, max)
-    {
+    function clamp(value, min, max) {
         return Math.min(Math.max(value, min), max);
     }
 }
 
-(function pick_greeting()
-{
+(function pick_greeting() {
     const hours = new Date().getHours();
     const greeing_el = document.querySelector(".greeting");
 
-    if (hours < 6)
-    {
+    if (hours < 6) {
         const data = "Good night";
         greeing_el.textContent = data;
         greeing_el.innerText = data;
-    } else if (hours >= 6 && hours < 12)
-    {
+    } else if (hours >= 6 && hours < 12) {
         const data = "Good morning";
         greeing_el.textContent = data;
         greeing_el.innerText = data;
-    } else if (hours >= 12 && hours < 16)
-    {
+    } else if (hours >= 12 && hours < 16) {
         const data = "Good afternoon";
         greeing_el.textContent = data;
         greeing_el.innerText = data;
-    } else if (hours >= 16 && hours <= 23)
-    {
+    } else if (hours >= 16 && hours <= 23) {
         const data = "Good evening";
         greeing_el.textContent = data;
         greeing_el.innerText = data;
-    } else
-    {
+    } else {
         const data = "Hello";
         greeing_el.textContent = data;
         greeing_el.innerText = data;
@@ -92,8 +79,7 @@ export function perspective_3d(class_name)
     setTimeout(pick_greeting, 6e4);
 })();
 
-(function render_time()
-{
+(function render_time() {
     const time = new Date();
     let h = time.getHours();
 
