@@ -13,7 +13,7 @@ Only [Vite](https://vitejs.dev/) for development and bundling.
 To download the repository and install dependencies, run the following commands:
 
 ```bash
-git clone git://github.com/xzeldon/zeldon-site.git # replace [xzeldon] with your github username if you fork first.
+git clone git@github.com:xzeldon/zeldon-site.git # replace [xzeldon] with your github username if you fork first.
 cd zeldon-site
 npm install
 ```
