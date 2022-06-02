@@ -1,10 +1,10 @@
 {
-  "name": "zeldon-site",
+  "name": "eldon-site",
   "version": "1.0.0",
   "description": "My personal website — Build with Vanilla JS.",
   "license": "MIT",
   "author": {
-    "name": "Timofey (xzeldon)",
+    "name": "Timofey (xeldon)",
     "email": "contact@zeldon.ru",
     "url": "https://zeldon.ru"
   },

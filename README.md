@@ -1,12 +1,12 @@
 # Personal Website
 
-See: [zeldon.ru](https://zeldon.ru).
+See: [eldon.ru](https://zeldon.ru).
 
 My personal website. An [MIT](https://github.com/xzeldon/zeldon-site/blob/main/LICENSE) licensed, easy modifiable. 
 
 ## Dependencies
 
-Only [Vite](https://vitejs.dev/) for development and bundling.
+Only [ite](https://vitejs.dev/) for development and bundling.
 
 ## Set up
 
