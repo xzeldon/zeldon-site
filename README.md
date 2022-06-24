@@ -2,7 +2,7 @@
 
 See: [zeldon.ru](https://zeldon.ru).
 
-My personal website. An [MIT](https://github.com/xzeldon/zeldon-site/blob/main/LICENSE) licensed, easy modifiable. 
+My personal website. An [MIT](https://gitlab.zeldon.ru/zeldon-ru/zeldon-site/-/blob/main/LICENSE) licensed, easy modifiable. 
 
 ## Dependencies
 
@@ -13,7 +13,7 @@ Only [Vite](https://vitejs.dev/) for development and bundling.
 To download the repository and install dependencies, run the following commands:
 
 ```bash
-git clone git@github.com:xzeldon/zeldon-site.git # replace [xzeldon] with your github username if you fork first.
+git clone https://gitlab.zeldon.ru/zeldon-ru/zeldon-site.git
 cd zeldon-site
 npm install
 ```
