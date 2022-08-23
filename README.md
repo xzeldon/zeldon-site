@@ -2,7 +2,9 @@
 
 See: [zeldon.ru](https://zeldon.ru).
 
-My personal website. An [MIT](https://gitlab.zeldon.ru/zeldon-ru/zeldon-site/-/blob/main/LICENSE) licensed, easy modifiable. 
+My personal website. An [MIT](https://git.zeldon.ru/zeldon/zeldon-site/src/branch/main/LICENSE) licensed, easy modifiable.
+
+Mirror on my [<img src="https://git.zeldon.ru/assets/img/logo.svg" align="center" width="20" height="20"/> Git](https://git.zeldon.ru/zeldon/zeldon-site)
 
 ## Dependencies
 
@@ -13,7 +15,7 @@ Only [Vite](https://vitejs.dev/) for development and bundling.
 To download the repository and install dependencies, run the following commands:
 
 ```bash
-git clone https://gitlab.zeldon.ru/zeldon-ru/zeldon-site.git
+git clone https://git.zeldon.ru/zeldon/zeldon-site.git
 cd zeldon-site
 npm install
 ```
@@ -31,6 +33,7 @@ Your web browser should automatically open to `<ip>:<port>:<path>` default: [htt
 ## Static export
 
 To statically export the site, run this command:
+
 ```bash
 npm run build
 ```
