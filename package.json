@@ -27,6 +27,6 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "vite": "^2.3.7"
+    "vite": "^4.0.4"
   }
 }
