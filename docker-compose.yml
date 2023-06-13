@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  zeldon-site:
+    image: zeldon-site:latest
+    container_name: zeldon-site
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3123:80
+    restart: unless-stopped
