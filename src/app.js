@@ -1,98 +1,135 @@
-import { event_listener_array, calc_delta_time } from './utils';
+import { addEventListeners, calcDeltaTime } from "./utils";
 
-export function perspective_3d(class_name) {
-    const elements = document.body.getElementsByClassName(class_name);
+/**
+ * Adds 3D perspective rotation effect to elements with the specified class name.
+ * The rotation is controlled by mouse/touch movement and uses spring physics for smooth animation.
+ * @param {string} className - The class name of elements to apply the 3D effect to
+ */
+export const add3DRotationEffect = (className) => {
+	const elements = document.body.getElementsByClassName(className);
 
-    let velocity_x = 0;
-    let velocity_y = 0;
-    let rotation_x = 0;
-    let rotation_y = 0;
-    let target_rotation_x = 0;
-    let target_rotation_y = 0;
+	const state = {
+		velocity: { x: 0, y: 0 },
+		rotation: { x: 0, y: 0 },
+		targetRotation: { x: 0, y: 0 },
+	};
 
-    (function update() {
-        let dt = calc_delta_time();
-        const ss = .08;
+	/**
+	 * Calculates spring physics for smooth animation
+	 * @param {number} position - Current position
+	 * @param {number} target - Target position
+	 * @param {number} velocity - Current velocity
+	 * @param {number} omega - Angular frequency
+	 * @param {number} dt - Delta time
+	 * @returns {number} New velocity
+	 */
+	const spring = (position, target, velocity, omega, dt) => {
+		const n1 = velocity - (position - target) * (omega ** 2 * dt);
+		const n2 = 1 + omega * dt;
+		return n1 / n2 ** 2;
+	};
 
-        velocity_x = spring(rotation_x, target_rotation_x, velocity_x, 10, dt);
-        velocity_y = spring(rotation_y, target_rotation_y, velocity_y, 10, dt);
-        rotation_x += velocity_x * dt * ss;
-        rotation_y += velocity_y * dt * ss;
+	/**
+	 * Clamps a value between min and max
+	 * @param {number} value - Value to clamp
+	 * @param {number} min - Minimum value
+	 * @param {number} max - Maximum value
+	 * @returns {number} Clamped value
+	 */
+	const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-        const style = `perspective(700px) rotateX(${rotation_y}rad) rotateY(${rotation_x}rad)`;
+	/**
+	 * Updates rotation values and applies transform styles in animation frame
+	 */
+	const updateRotation = () => {
+		const dt = calcDeltaTime();
+		const springConstant = 0.08;
 
-        for (const el of elements) {
-            el.style.transform = style;
-        }
+		state.velocity.x = spring(
+			state.rotation.x,
+			state.targetRotation.x,
+			state.velocity.x,
+			10,
+			dt
+		);
+		state.velocity.y = spring(
+			state.rotation.y,
+			state.targetRotation.y,
+			state.velocity.y,
+			10,
+			dt
+		);
 
-        requestAnimationFrame(update);
-    })();
+		state.rotation.x += state.velocity.x * dt * springConstant;
+		state.rotation.y += state.velocity.y * dt * springConstant;
 
-    event_listener_array(window, ["mousemove", "touchmove"], (e) => {
-        if (e.changedTouches && e.changedTouches[0]) {
-            e = e.changedTouches[0];
-        }
+		const style = `perspective(700px) rotateX(${state.rotation.y}rad) rotateY(${state.rotation.x}rad)`;
+		Array.from(elements).forEach((el) => (el.style.transform = style));
 
-        target_rotation_x = (e.clientX / window.innerWidth) * 2 - 1;
-        target_rotation_y = -(e.clientY / window.innerHeight) * 2 + 1;
+		requestAnimationFrame(updateRotation);
+	};
 
-        target_rotation_x = clamp(target_rotation_x, -0.5, 0.5);
-        target_rotation_y = clamp(target_rotation_y, -0.5, 0.5);
-    }, false);
+	/**
+	 * Handles mouse/touch movement to update target rotation
+	 * @param {(MouseEvent|TouchEvent)} e - Mouse or touch event
+	 */
+	const handleMovement = (e) => {
+		const event = e.changedTouches?.[0] || e;
 
-    function spring(position, target, velocity, omega, dt) {
-        let n1 = velocity - (position - target) * (Math.pow(omega, 2) * dt);
-        let n2 = 1 + omega * dt;
-        return n1 / Math.pow(n2, 2);
-    }
-    function clamp(value, min, max) {
-        return Math.min(Math.max(value, min), max);
-    }
-}
+		state.targetRotation.x = (event.clientX / window.innerWidth) * 2 - 1;
+		state.targetRotation.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-(function pick_greeting() {
-    const hours = new Date().getHours();
-    const greeing_el = document.querySelector(".greeting");
+		state.targetRotation.x = clamp(state.targetRotation.x, -0.5, 0.5);
+		state.targetRotation.y = clamp(state.targetRotation.y, -0.5, 0.5);
+	};
 
-    if (hours < 6) {
-        const data = "Good night";
-        greeing_el.textContent = data;
-        greeing_el.innerText = data;
-    } else if (hours >= 6 && hours < 12) {
-        const data = "Good morning";
-        greeing_el.textContent = data;
-        greeing_el.innerText = data;
-    } else if (hours >= 12 && hours < 16) {
-        const data = "Good afternoon";
-        greeing_el.textContent = data;
-        greeing_el.innerText = data;
-    } else if (hours >= 16 && hours <= 23) {
-        const data = "Good evening";
-        greeing_el.textContent = data;
-        greeing_el.innerText = data;
-    } else {
-        const data = "Hello";
-        greeing_el.textContent = data;
-        greeing_el.innerText = data;
-    }
+	addEventListeners(window, ["mousemove", "touchmove"], handleMovement, false);
 
-    setTimeout(pick_greeting, 6e4);
-})();
+	updateRotation();
+};
 
-(function render_time() {
-    const time = new Date();
-    let h = time.getHours();
+/**
+ * Updates greeting text based on time of day.
+ * Updates every minute.
+ */
+export const updateGreeting = () => {
+	const hours = new Date().getHours();
+	const greetingEl = document.querySelector(".greeting");
+	if (!greetingEl) return;
 
-    h = h.toString().padStart(2, 0);
-    let m = time.getMinutes().toString().padStart(2, 0);
-    let s = time.getSeconds().toString().padStart(2, 0);
+	/**
+	 * Gets appropriate greeting based on hour of day
+	 * @param {number} hours - Hour in 24-hour format
+	 * @returns {string} Greeting text
+	 */
+	const getGreeting = (hours) => {
+		if (hours < 6) return "Good night";
+		if (hours < 12) return "Good morning";
+		if (hours < 16) return "Good afternoon";
+		if (hours <= 23) return "Good evening";
+		return "Hello";
+	};
 
-    const clock_el = document.querySelector('.clock');
-    if (!clock_el) return;
+	const greeting = getGreeting(hours);
+	greetingEl.textContent = greeting;
 
-    const formatted_date = `${h}:${m}:${s}`;
-    clock_el.textContent = formatted_date;
-    clock_el.innerText = formatted_date;
+	setTimeout(updateGreeting, 60_000); // 60 seconds
+};
 
-    setTimeout(render_time, 1e3);
-})();
+/**
+ * Updates clock display with current time in HH:MM:SS format.
+ * Updates every second.
+ */
+export const updateTime = () => {
+	const clockEl = document.querySelector(".clock");
+	if (!clockEl) return;
+
+	const time = new Date();
+	const formatted_date = [time.getHours(), time.getMinutes(), time.getSeconds()]
+		.map((num) => num.toString().padStart(2, "0"))
+		.join(":");
+
+	clockEl.textContent = formatted_date;
+
+	setTimeout(updateTime, 1000);
+};
