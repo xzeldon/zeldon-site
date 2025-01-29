@@ -2,7 +2,7 @@
 MIT License
 
 Copyright (c) 2017 Pavel Dobryakov
-Copyright (c) 2021 Timofey Gelazoniya
+Copyright (c) 2021-2025 Timofey Gelazoniya
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ const canvas = document.getElementsByTagName("canvas")[0];
 resizeCanvas();
 
 let config = {
-	SIM_RESOLUTION: 128,
+	SIM_RESOLUTION: 256,
 	DYE_RESOLUTION: 1024,
 	CAPTURE_RESOLUTION: 512,
 	DENSITY_DISSIPATION: 1,
@@ -79,6 +79,7 @@ pointers.push(new pointerPrototype());
 const { gl, ext } = getWebGLContext(canvas);
 
 if (isMobile()) {
+	config.SIM_RESOLUTION = 128;
 	config.DYE_RESOLUTION = 512;
 }
 
@@ -1560,6 +1561,7 @@ function splatPointer(pointer) {
 }
 
 function multipleSplats(amount) {
+	const splatData = [];
 	for (let i = 0; i < amount; i++) {
 		const color = generateColor();
 		color.r *= 10.0;
@@ -1569,8 +1571,36 @@ function multipleSplats(amount) {
 		const y = Math.random();
 		const dx = 1000 * (Math.random() - 0.5);
 		const dy = 1000 * (Math.random() - 0.5);
-		splat(x, y, dx, dy, color);
+		splatData.push({ x, y, dx, dy, color });
 	}
+
+	splatProgram.bind();
+	gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+	gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
+	gl.uniform1f(
+		splatProgram.uniforms.radius,
+		correctRadius(config.SPLAT_RADIUS / 100.0)
+	);
+
+	splatData.forEach((data) => {
+		gl.uniform2f(splatProgram.uniforms.point, data.x, data.y);
+		gl.uniform3f(splatProgram.uniforms.color, data.dx, data.dy, 0.0);
+		blit(velocity.write);
+	});
+	velocity.swap();
+
+	gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
+	splatData.forEach((data) => {
+		gl.uniform2f(splatProgram.uniforms.point, data.x, data.y);
+		gl.uniform3f(
+			splatProgram.uniforms.color,
+			data.color.r,
+			data.color.g,
+			data.color.b
+		);
+		blit(dye.write);
+	});
+	dye.swap();
 }
 
 function splat(x, y, dx, dy, color) {
