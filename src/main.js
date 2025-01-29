@@ -1,10 +1,10 @@
-import "./css/style.css";
-import "./css/font.css";
-import "./css/animation.css";
-import "./css/button.css";
+import "./styles/base.css";
+import "./styles/typography.css";
+import "./styles/animations.css";
+import "./styles/components.css";
 
-import "./app";
-import { add3DRotationEffect, updateGreeting, updateTime } from "./app";
+import "./effects";
+import { add3DRotationEffect, updateGreeting, updateTime } from "./effects";
 import { importJsAsModule } from "./utils";
 
 const initialize = async () => {
