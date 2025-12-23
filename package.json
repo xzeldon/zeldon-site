@@ -1,32 +1,32 @@
 {
-  "name": "zeldon-site",
-  "version": "1.0.0",
-  "description": "My personal website — Build with Vanilla JS.",
-  "license": "MIT",
-  "author": {
-    "name": "Timofey (xzeldon)",
-    "email": "contact@zeldon.ru",
-    "url": "https://zeldon.ru"
-  },
-  "contributors": [
-    {
-      "name": "Nikita (xm1ller)",
-      "email": "xm1ller.digital@gmail.com"
-    }
-  ],
-  "homepage": "https://zeldon.ru",
-  "keywords": [
-    "website",
-    "personal",
-    "site",
-    "homepage"
-  ],
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^4.3.9"
-  }
+	"name": "zeldon-site",
+	"version": "1.0.0",
+	"description": "My personal website — Build with Vanilla JS.",
+	"license": "MIT",
+	"author": {
+		"name": "Timofey (xzeldon)",
+		"email": "contact@zeldon.ru",
+		"url": "https://zeldon.ru"
+	},
+	"contributors": [
+		{
+			"name": "Nikita (xm1ller)",
+			"email": "xm1ller.digital@gmail.com"
+		}
+	],
+	"homepage": "https://zeldon.ru",
+	"keywords": [
+		"website",
+		"personal",
+		"site",
+		"homepage"
+	],
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"serve": "vite preview"
+	},
+	"devDependencies": {
+		"vite": "^7.3.0"
+	}
 }
