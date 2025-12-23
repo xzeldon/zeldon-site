@@ -49,14 +49,14 @@ export const add3DRotationEffect = (className) => {
 			state.rotation.x,
 			state.targetRotation.x,
 			state.velocity.x,
-			10,
+			4,
 			dt
 		);
 		state.velocity.y = spring(
 			state.rotation.y,
 			state.targetRotation.y,
 			state.velocity.y,
-			10,
+			4,
 			dt
 		);
 
