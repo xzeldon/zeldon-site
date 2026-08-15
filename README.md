@@ -4,8 +4,6 @@ See: [zeldon.ru](https://zeldon.ru).
 
 My personal website. An [MIT](https://git.zeldon.ru/zeldon/zeldon-site/src/branch/main/LICENSE) licensed, easy modifiable.
 
-Mirror on my [<img src="https://git.zeldon.ru/assets/img/logo.svg" align="center" width="20" height="20"/> Git](https://git.zeldon.ru/zeldon/zeldon-site)
-
 ## Dependencies
 
 Only [Vite](https://vitejs.dev/) for development and bundling.
